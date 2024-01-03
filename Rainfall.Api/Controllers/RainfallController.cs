@@ -16,9 +16,11 @@ namespace Rainfall.Api.Controllers
 
         [HttpGet]
         [Route("id/{stationId}/readings")]
-        public IActionResult Get(string stationId, int count = 100)
+        public async Task<IActionResult> Get(string stationId, int count = 100)
         {
-            return null;
+            var measures = await _stationMeasuresClient.GetStationMeasures(stationId, count);
+
+            return measures == null ? NotFound() : Ok(measures);
         }
     }
 }

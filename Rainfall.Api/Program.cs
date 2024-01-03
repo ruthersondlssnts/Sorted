@@ -9,15 +9,15 @@ namespace Rainfall.Api
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            //https://environment.data.gov.uk/flood-monitoring/id/stations/3680/readings?_sorted&_limit=100
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
             builder.Services.AddHttpClient<IRainfallClient, RainfallClient>(client =>
             {
                 client.BaseAddress = new Uri("https://environment.data.gov.uk/flood-monitoring");
             });
+            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
+
 
             var app = builder.Build();
 
