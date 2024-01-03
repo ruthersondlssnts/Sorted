@@ -1,4 +1,5 @@
-﻿using Rainfall.Api.Models;
+﻿using Newtonsoft.Json;
+using Rainfall.Api.Models;
 
 namespace Rainfall.Api.Client
 {
@@ -13,7 +14,11 @@ namespace Rainfall.Api.Client
 
         public async Task<RainfallReadingResponse> GetStationMeasures(string stationId, int count)
         {
-            return await _httpClient.GetFromJsonAsync<RainfallReadingResponse>($"id/stations/{stationId}/readings?_sorted&_limit={count}");
+            var readings = await _httpClient.GetAsync($"flood-monitoring/id/stations/{stationId}/readings?_sorted&_limit={count}");
+
+            var jsonResponse = await readings.Content.ReadAsStringAsync();
+
+            return JsonConvert.DeserializeObject<RainfallReadingResponse>(jsonResponse);
         }
     }
 }

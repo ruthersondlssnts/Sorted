@@ -12,7 +12,7 @@ namespace Rainfall.Api
             builder.Services.AddControllers();
             builder.Services.AddHttpClient<IRainfallClient, RainfallClient>(client =>
             {
-                client.BaseAddress = new Uri("https://environment.data.gov.uk/flood-monitoring");
+                client.BaseAddress = new Uri("https://environment.data.gov.uk");
             });
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
